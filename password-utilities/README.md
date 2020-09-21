@@ -5,6 +5,8 @@
 - [Password Utilities](#password-utilities)
   - [Password Generator](#password-generator)
   - [Random Characters](#random-characters)
+  - [Function Options](#function-options)
+  - [Human-friendly Passwords](#human-friendly-passwords)
 
 ## Password Generator
 
@@ -51,3 +53,36 @@
 - In the future, it may be possible that we'll find out that there's some other weakness to them, but it is much, much more secure than using either `rand()` or `mt_rand()`.
   - The problem with it, though, is that it's a new function that's going to be part of PHP 7.
   - If you have PHP 7 or later, you have it available to you, and you should use it.
+
+## Function Options
+
+- Ideally, you want your functions to be self-contained.
+  - That is, you want to pass in the arguments that they need to do their job, and then they'll return back a result at the end.
+  - What you want to try not to do is to reference global or super-global variables inside the function.
+  - It keeps them from being independent, and they're less flexible then.
+  - Functions are a self-contained unit if all the knowledge they need is passed in as an argument.
+- In PHP specifically, a function should _not_ use the super global `$_GET`, for instance.
+  - This would require the function to have the specific context of retrieving values from GET requests only.
+  - Instead, you could pass in `$options` as a parameter into the function to set things.
+
+## Human-friendly Passwords
+
+- Completely random passwords are secure. They contain letters, numbers, and symbols.
+  - You can easily get to billions and trillions of possible combinations.
+  - That makes them impossible to guess and very slow for even the best computers to try all possible combinations.
+  - But they don't take into account that humans are terrible at remembering complicated strings of letters and numbers.
+- Becauseo of this, we end up writing them down, which in turn makes them less secure.
+  - Eg. The Wi-Fi password at your house is a secure password. It uses uppercase and lowercase letters with numbers mixed in.
+  - But if you can't remember it, then it's written down on a piece of paper.
+  - Written down passwords can be weaker than having a less secure password to start with.
+  - Now that statement requires qualification: At home, writing down a password is secure from the general public because you still control access to the piece of paper inside your house.
+- But at work, you may not have that much control over who sees the Post-it note stuck to your computer monitor.
+  - And that's different still from an email account or a server that's on the internet where anyone in the world can run a hacking script for days or weeks, trying all possible combinations until they get in.
+  - In that case, you'd want the most secure password possible.
+  - If you write it down, the hackers of the world can't see that paper, so the type and the strength of your password very much depends on your situation and your security concerns.
+- But to go back to the previous example, you don't need my home WiFi to be _that_ secure.
+  - You're not really worried that someone in your neighborhood is going to try to figure out your password to either get free internet or to watch you surf the web.
+  - In that case, you'd rather have a friendlier, still somewhat secure password that you could easily remember.
+- These passwords are going to be generated from dictionary words combined with numbers and symbols.
+  - For example, we might have `nice42password`, `boots395wind`, `chase\*59rabbit`.
+  - You can see how these are much easier to read, much easier to remember, much easier to communicate to someone else than the random strings.

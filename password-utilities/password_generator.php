@@ -16,7 +16,7 @@ function random_string($length, $char_set) {
     return $output;
 }
 
-function generate_password($length) {
+function generate_password($options) {
     // Define character sets:
     $chars = "";
     $lower_arr = range("a", "z");
@@ -29,20 +29,29 @@ function generate_password($length) {
     $symbl = "!@#$%^&*()-_~";
 
     // Extract configuration flags into variables:
-    $use_lower = isset($_GET['lower']) ? $_GET['lower'] : '0';
-    $use_upper = isset($_GET['upper']) ? $_GET['upper'] : '0';;
-    $use_numbr = isset($_GET['numbr']) ? $_GET['numbr'] : '0';;
-    $use_symbl = isset($_GET['symbl']) ? $_GET['symbl'] : '0';;
+    $use_lower = isset($options["lower"]) ? $options["lower"] : "0";
+    $use_upper = isset($options["upper"]) ? $options["upper"] : "0";;
+    $use_numbr = isset($options["numbr"]) ? $options["numbr"] : "0";;
+    $use_symbl = isset($options["symbl"]) ? $options["symbl"] : "0";;
 
-    if($use_lower === '1') { $chars .= $lower; }
-    if($use_upper === '1') { $chars .= $upper; }
-    if($use_numbr === '1') { $chars .= $numbr; }
-    if($use_symbl === '1') { $chars .= $symbl; }
+    if($use_lower === "1") { $chars .= $lower; }
+    if($use_upper === "1") { $chars .= $upper; }
+    if($use_numbr === "1") { $chars .= $numbr; }
+    if($use_symbl === "1") { $chars .= $symbl; }
 
+    $length = isset($options["length"]) ? $options["length"] : 8;
     return random_string($length, $chars);
 }
 
-$password = generate_password($_GET['length']);
+$options = array(
+    "length" => $_GET["length"],
+    "lower" => $_GET["lower"],
+    "upper" => $_GET["upper"],
+    "numbr" => $_GET["numbr"],
+    "symbl" => $_GET["symbl"]
+);
+
+$password = generate_password($options);
 
 ?>
 
@@ -60,15 +69,15 @@ $password = generate_password($_GET['length']);
     <p>Generate a new password using the form options:</p>
     <form action="" method="get">
         Length: <input type="number" name="length" min="1" max="99" 
-        value="<$php if(isset($_GET['length'])) { echo $_GET['length']; } ?>"/>
+        value="<$php if(isset($_GET["length"])) { echo $_GET["length"]; } ?>"/>
         <br />
-        <input type="checkbox" name="lower" value="1" <?php if($_GET['lower'] == 1 ) { echo 'checked'; }?> /> Lowercase characters (abc...)
+        <input type="checkbox" name="lower" value="1" <?php if($_GET["lower"] == 1 ) { echo "checked"; }?> /> Lowercase characters (abc...)
         <br />
-        <input type="checkbox" name="upper" value="1" <?php if($_GET['upper'] == 1 ) { echo 'checked'; }?> /> Uppercase characters (ABC...)
+        <input type="checkbox" name="upper" value="1" <?php if($_GET["upper"] == 1 ) { echo "checked"; }?> /> Uppercase characters (ABC...)
         <br />
-        <input type="checkbox" name="numbr" value="1" <?php if($_GET['numbr'] == 1 ) { echo 'checked'; }?> /> Numerical values (123...)
+        <input type="checkbox" name="numbr" value="1" <?php if($_GET["numbr"] == 1 ) { echo "checked"; }?> /> Numerical values (123...)
         <br />
-        <input type="checkbox" name="symbl" value="1" <?php if($_GET['symbl'] == 1 ) { echo 'checked'; }?> /> Symbols (!@#)
+        <input type="checkbox" name="symbl" value="1" <?php if($_GET["symbl"] == 1 ) { echo "checked"; }?> /> Symbols (!@#)
         <br />
         <input type="submit" value="Submit" />
     </form>
