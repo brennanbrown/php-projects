@@ -7,6 +7,7 @@
   - [Random Characters](#random-characters)
   - [Function Options](#function-options)
   - [Human-friendly Passwords](#human-friendly-passwords)
+  - [Dictionaries in PHP](#dictionaries-in-php)
 
 ## Password Generator
 
@@ -86,3 +87,25 @@
 - These passwords are going to be generated from dictionary words combined with numbers and symbols.
   - For example, we might have `nice42password`, `boots395wind`, `chase\*59rabbit`.
   - You can see how these are much easier to read, much easier to remember, much easier to communicate to someone else than the random strings.
+
+## Dictionaries in PHP
+
+- Completely random passwords like those from the last chapter are secure.
+  - They contain letters, numbers, and symbols. As we saw, you can easily get to billions and trillions of possible combinations.
+  - That makes them impossible to guess and very slow for even the best computers to try all possible combinations.
+  - But they don't take into account that humans are terrible at remembering complicated strings of letters and numbers.
+- We end up writing them down, which in turn makes them less secure.
+  - For example, the WiFi password at my house is a secure password.
+  - It uses uppercase and lowercase letters with numbers mixed in. Verizon picked it, and I can't remember it.
+  - It's written down on a piece of paper that we can hand to guests when they need WiFi.
+- Written down passwords can be weaker than having a less secure password to start with.
+  - That statement requires qualification: At home, writing down a password is secure from the general public because you still control access to the piece of paper inside your house.
+- At work, you may not have that much control over who sees the Post-it note stuck to your computer monitor.
+  - That's different still from an email account or a server that's on the internet where anyone in the world can run a hacking script for days or weeks, trying all possible combinations until they get in.
+  - In that case, you'd rather have the most secure password possible.
+  - And, if written down, the hackers of the world can't see the paper, so the type and the strength of your password very much depends on your situation and your security concerns.
+- You are capable of trading off some security in order to generate passwords that are easier to remember.
+  - Think of these as friendlier passwords.
+  - Our friendly passwords are going to be generated from dictionary words combined with numbers and symbols.
+- For example. you might have `nice42password`, `boots395wind`, `chase\*59rabbit`.
+  - You can see how these are much easier to read, much easier to remember, much easier to communicate to someone else than the random strings that we were generating in the last movie.
